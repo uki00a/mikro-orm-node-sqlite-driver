@@ -211,11 +211,15 @@ function rewriteImportDeclarations(sourceFile: SourceFile): void {
     ensureTsExtname(importDeclaration);
     for (const namedImport of importDeclaration.getNamedImports()) {
       if (namedImport.getName() === "BetterSqliteKnexDialect") {
+        const nameNode = namedImport.getNameNode();
+        if (!Node.isIdentifier(nameNode)) continue;
         const newName = "NodeSqliteKnexDialect";
         for (
-          const reference of namedImport.getNameNode().findReferencesAsNodes()
+          const reference of nameNode.findReferencesAsNodes()
         ) {
-          reference.rename(newName);
+          if (Node.isRenameable(reference)) {
+            reference.rename(newName);
+          }
         }
         namedImport.remove();
         sourceFile.addImportDeclaration({
