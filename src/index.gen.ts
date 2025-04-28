@@ -28,9 +28,9 @@
  */
 /* istanbul ignore file */
 export * from '@mikro-orm/knex';
-export * from './NodeSqliteConnection.gen';
-export * from './NodeSqliteDriver.gen';
-export * from './NodeSqlitePlatform.gen';
-export * from './NodeSqliteSchemaHelper.gen';
-export * from './NodeSqliteExceptionConverter.gen';
-export { NodeSqliteMikroORM as MikroORM, NodeSqliteOptions as Options, defineNodeSqliteConfig as defineConfig, } from './NodeSqliteMikroORM.gen';
+export * from './NodeSqliteConnection.gen.ts';
+export * from './NodeSqliteDriver.gen.ts';
+export * from './NodeSqlitePlatform.gen.ts';
+export * from './NodeSqliteSchemaHelper.gen.ts';
+export * from './NodeSqliteExceptionConverter.gen.ts';
+export { NodeSqliteMikroORM as MikroORM, NodeSqliteOptions as Options, defineNodeSqliteConfig as defineConfig, } from './NodeSqliteMikroORM.gen.ts';

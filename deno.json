@@ -1,5 +1,6 @@
 {
   "tasks": {
+    "clean:gen": "rm src/*.gen.ts",
     "tools:patch": "deno run --allow-net=api.github.com,raw.githubusercontent.com --allow-read=tmp --allow-write=src,tmp tools/patch.ts",
     "check": {
       "dependencies": ["lint", "typecheck"]

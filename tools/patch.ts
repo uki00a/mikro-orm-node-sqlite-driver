@@ -1,5 +1,9 @@
 import { basename, join } from "node:path";
-import type { SourceFile } from "@ts-morph/ts-morph";
+import type {
+  ExportDeclaration,
+  ImportDeclaration,
+  SourceFile,
+} from "@ts-morph/ts-morph";
 import { Node, Project } from "@ts-morph/ts-morph";
 
 const kRepository = "mikro-orm/mikro-orm";
@@ -134,6 +138,7 @@ function patchSource(
   rewriteExportedDeclarations(sourceFile);
   rewriteStringLiterals(sourceFile);
   rewriteImportDeclarations(sourceFile);
+  rewriteExportDeclarations(sourceFile);
   sourceFile.formatText();
 }
 
@@ -191,14 +196,19 @@ function renameSourceFile(sourceFile: SourceFile): void {
   );
 }
 
+function ensureTsExtname(
+  declaration: ImportDeclaration | ExportDeclaration,
+): void {
+  const specifier = declaration.getModuleSpecifierValue();
+  // Append `.ts` if needed
+  if (specifier?.startsWith("./") || specifier?.startsWith("../")) {
+    declaration.setModuleSpecifier(`${specifier}.ts`);
+  }
+}
+
 function rewriteImportDeclarations(sourceFile: SourceFile): void {
   for (const importDeclaration of sourceFile.getImportDeclarations()) {
-    const specifier = importDeclaration.getModuleSpecifierValue();
-    // Append `.ts` if needed
-    if (specifier.startsWith("./") || specifier.startsWith("../")) {
-      importDeclaration.setModuleSpecifier(`${specifier}.ts`);
-    }
-
+    ensureTsExtname(importDeclaration);
     for (const namedImport of importDeclaration.getNamedImports()) {
       if (namedImport.getName() === "BetterSqliteKnexDialect") {
         namedImport.remove();
@@ -208,6 +218,12 @@ function rewriteImportDeclarations(sourceFile: SourceFile): void {
         });
       }
     }
+  }
+}
+
+function rewriteExportDeclarations(sourceFile: SourceFile): void {
+  for (const exportDeclaration of sourceFile.getExportDeclarations()) {
+    ensureTsExtname(exportDeclaration);
   }
 }
 
