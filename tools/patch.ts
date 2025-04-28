@@ -50,15 +50,19 @@ async function ensureSources(): Promise<void> {
 async function cacheSources() {
   log("Downloading sources...");
   await Deno.mkdir(kCacheSrcDir, { recursive: true });
+  const headers = {
+    "Accept": "application/vnd.github+json",
+    "X-GitHub-Api-Version": "2022-11-28",
+    ...(Deno.env.has("GITHUB_TOKEN")
+      ? { "Authorization": `Bearer ${Deno.env.get("GITHUB_TOKEN")}` }
+      : undefined),
+  };
   {
     // Fetch sources
     const res = await fetch(
       `https://api.github.com/repos/${kRepository}/contents/${kPathToBasePackageSrcDir}?ref=${kVersion}`,
       {
-        headers: {
-          "Accept": "application/vnd.github+json",
-          "X-GitHub-Api-Version": "2022-11-28",
-        },
+        headers,
       },
     );
     const sources = await res.json();
@@ -77,10 +81,7 @@ async function cacheSources() {
     const res = await fetch(
       `https://api.github.com/repos/${kRepository}/contents/${kPathToLICENSE}?ref=${kVersion}`,
       {
-        headers: {
-          "Accept": "application/vnd.github+json",
-          "X-GitHub-Api-Version": "2022-11-28",
-        },
+        headers,
       },
     );
     const source = await res.json();
