@@ -211,6 +211,7 @@ function rewriteImportDeclarations(sourceFile: SourceFile): void {
     ensureTsExtname(importDeclaration);
     for (const namedImport of importDeclaration.getNamedImports()) {
       if (namedImport.getName() === "BetterSqliteKnexDialect") {
+        // Replace references to `BetterSqliteKnexDialect` with `NodeSqliteKnexDialect`
         const nameNode = namedImport.getNameNode();
         if (!Node.isIdentifier(nameNode)) continue;
         const newName = "NodeSqliteKnexDialect";
@@ -234,6 +235,21 @@ function rewriteImportDeclarations(sourceFile: SourceFile): void {
 function rewriteExportDeclarations(sourceFile: SourceFile): void {
   for (const exportDeclaration of sourceFile.getExportDeclarations()) {
     ensureTsExtname(exportDeclaration);
+
+    // Enforce type-only exports for interfaces and type aliases.
+    for (const namedExport of exportDeclaration.getNamedExports()) {
+      const nameNode = namedExport.getNameNode();
+      if (!Node.isIdentifier(nameNode)) continue;
+      const definitions = nameNode.getDefinitionNodes();
+      if (definitions.length === 0) continue;
+      const [definition] = definitions;
+      if (
+        Node.isTypeAliasDeclaration(definition) ||
+        Node.isInterfaceDeclaration(definition)
+      ) {
+        namedExport.setIsTypeOnly(true);
+      }
+    }
   }
 }
 

@@ -33,4 +33,4 @@ export * from './NodeSqliteDriver.gen.ts';
 export * from './NodeSqlitePlatform.gen.ts';
 export * from './NodeSqliteSchemaHelper.gen.ts';
 export * from './NodeSqliteExceptionConverter.gen.ts';
-export { NodeSqliteMikroORM as MikroORM, NodeSqliteOptions as Options, defineNodeSqliteConfig as defineConfig, } from './NodeSqliteMikroORM.gen.ts';
+export { NodeSqliteMikroORM as MikroORM, type NodeSqliteOptions as Options, defineNodeSqliteConfig as defineConfig, } from './NodeSqliteMikroORM.gen.ts';
