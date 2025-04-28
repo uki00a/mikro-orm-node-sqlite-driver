@@ -9,6 +9,7 @@
     "typecheck": "deno check src/index.ts tools"
   },
   "imports": {
+    "@mikro-orm/core": "npm:@mikro-orm/core",
     "@mikro-orm/knex": "npm:@mikro-orm/knex",
     "@ts-morph/ts-morph": "jsr:@ts-morph/ts-morph@^25.0.1",
     "sqlstring-sqlite": "npm:sqlstring-sqlite"
