@@ -93,6 +93,8 @@ async function patchSources(): Promise<void> {
       allowImportingTsExtensions: true,
     },
   });
+
+  // 1. Read cached sources
   const license = await Deno.readTextFile(join(kCacheDir, kPathToLICENSE));
   for await (const item of Deno.readDir(kCacheSrcDir)) {
     const filename = join(kCacheSrcDir, item.name);
@@ -103,9 +105,19 @@ async function patchSources(): Promise<void> {
     );
   }
 
+  const originalNames = new Map<SourceFile, string>();
+  // 2. Rename files
   for (const sourceFile of project.getSourceFiles()) {
-    patchSource(sourceFile, license);
+    originalNames.set(sourceFile, sourceFile.getFilePath());
+    renameSourceFile(sourceFile);
   }
+
+  // 3. Patch files
+  for (const sourceFile of project.getSourceFiles()) {
+    patchSource(sourceFile, license, originalNames);
+  }
+
+  // 4. Write patched files
   for (const sourceFile of project.getSourceFiles()) {
     const path = join(".", sourceFile.getFilePath());
     const content = sourceFile.print();
@@ -113,17 +125,24 @@ async function patchSources(): Promise<void> {
   }
 }
 
-function patchSource(sourceFile: SourceFile, license: string): void {
-  insertHeader(sourceFile, license);
+function patchSource(
+  sourceFile: SourceFile,
+  license: string,
+  originalNames: Map<SourceFile, string>,
+): void {
+  insertHeader(sourceFile, license, originalNames);
   rewriteExportedDeclarations(sourceFile);
   rewriteStringLiterals(sourceFile);
-  renameSourceFile(sourceFile);
   rewriteImportDeclarations(sourceFile);
   sourceFile.formatText();
 }
 
-function insertHeader(sourceFile: SourceFile, license: string): void {
-  const filePath = sourceFile.getFilePath();
+function insertHeader(
+  sourceFile: SourceFile,
+  license: string,
+  originalNames: Map<SourceFile, string>,
+): void {
+  const filePath = originalNames.get(sourceFile) ?? sourceFile.getFilePath();
   sourceFile.insertText(
     0,
     generateHeader({ filename: basename(filePath), license }),
@@ -164,21 +183,18 @@ function rewriteStringLiterals(sourceFile: SourceFile): void {
 
 function renameSourceFile(sourceFile: SourceFile): void {
   const filePath = sourceFile.getFilePath();
-  if (filePath.includes(kOriginalClassNamePrefix)) {
-    sourceFile.move(
-      filePath.replace(kOriginalClassNamePrefix, kNewClassNamePrefix).replace(
-        kOriginalExtname,
-        kNewExtname,
-      ),
-    );
-  } else {
-    sourceFile.move(filePath.replace(kOriginalExtname, kNewExtname));
-  }
+  sourceFile.move(
+    filePath.replace(kOriginalClassNamePrefix, kNewClassNamePrefix).replace(
+      kOriginalExtname,
+      kNewExtname,
+    ),
+  );
 }
 
 function rewriteImportDeclarations(sourceFile: SourceFile): void {
   for (const importDeclaration of sourceFile.getImportDeclarations()) {
     const specifier = importDeclaration.getModuleSpecifierValue();
+    // Append `.ts` if needed
     if (specifier.startsWith("./") || specifier.startsWith("../")) {
       importDeclaration.setModuleSpecifier(`${specifier}.ts`);
     }

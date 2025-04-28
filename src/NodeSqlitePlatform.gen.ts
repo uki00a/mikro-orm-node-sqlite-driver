@@ -29,7 +29,7 @@
 // @ts-ignore
 import { escape } from 'sqlstring-sqlite';
 import { BaseSqlitePlatform } from '@mikro-orm/knex';
-import { NodeSqliteSchemaHelper } from './NodeSqliteSchemaHelper.gen';
+import { NodeSqliteSchemaHelper } from './NodeSqliteSchemaHelper.gen.ts';
 import { NodeSqliteExceptionConverter } from './NodeSqliteExceptionConverter.gen.ts';
 export class NodeSqlitePlatform extends BaseSqlitePlatform {
     protected override readonly schemaHelper: NodeSqliteSchemaHelper = new NodeSqliteSchemaHelper(this);

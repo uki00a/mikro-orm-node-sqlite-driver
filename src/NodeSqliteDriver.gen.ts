@@ -29,7 +29,7 @@
 import type { Configuration } from '@mikro-orm/core';
 import { AbstractSqlDriver } from '@mikro-orm/knex';
 import { NodeSqliteConnection } from './NodeSqliteConnection.gen.ts';
-import { NodeSqlitePlatform } from './NodeSqlitePlatform.gen';
+import { NodeSqlitePlatform } from './NodeSqlitePlatform.gen.ts';
 export class NodeSqliteDriver extends AbstractSqlDriver<NodeSqliteConnection> {
     constructor(config: Configuration) {
         super(config, new NodeSqlitePlatform(), NodeSqliteConnection, ['knex', 'node:sqlite']);
