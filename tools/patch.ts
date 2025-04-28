@@ -211,10 +211,16 @@ function rewriteImportDeclarations(sourceFile: SourceFile): void {
     ensureTsExtname(importDeclaration);
     for (const namedImport of importDeclaration.getNamedImports()) {
       if (namedImport.getName() === "BetterSqliteKnexDialect") {
+        const newName = "NodeSqliteKnexDialect";
+        for (
+          const reference of namedImport.getNameNode().findReferencesAsNodes()
+        ) {
+          reference.rename(newName);
+        }
         namedImport.remove();
         sourceFile.addImportDeclaration({
           moduleSpecifier: "./NodeSqliteKnexDialect.ts",
-          namedImports: ["NodeSqliteKnexDialect"],
+          namedImports: [newName],
         });
       }
     }

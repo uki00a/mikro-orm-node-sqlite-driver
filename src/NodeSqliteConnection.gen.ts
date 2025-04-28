@@ -30,7 +30,7 @@ import { BaseSqliteConnection } from '@mikro-orm/knex';
 import { NodeSqliteKnexDialect } from "./NodeSqliteKnexDialect.ts";
 export class NodeSqliteConnection extends BaseSqliteConnection {
     override createKnex() {
-        this.client = this.createKnexClient(BetterSqliteKnexDialect as any);
+        this.client = this.createKnexClient(NodeSqliteKnexDialect as any);
         this.connected = true;
     }
 }
