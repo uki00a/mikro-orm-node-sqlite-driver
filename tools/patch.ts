@@ -103,7 +103,7 @@ async function patchSources(): Promise<void> {
   for await (const item of Deno.readDir(kCacheSrcDir)) {
     const filename = join(kCacheSrcDir, item.name);
     const source = await Deno.readTextFile(filename);
-    const sourceFile = project.createSourceFile(
+    project.createSourceFile(
       removePrefix(filename, kCacheDir),
       source,
     );
