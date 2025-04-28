@@ -1,0 +1,22 @@
+{
+  "tasks": {
+    "tools:patch": "deno run --allow-net=api.github.com,raw.githubusercontent.com --allow-read=tmp --allow-write=src,tmp tools/patch.ts",
+    "check": {
+      "dependencies": ["lint", "typecheck"]
+    },
+    "lint": "deno fmt --check && deno lint",
+    "typecheck": "deno check src/index.ts tools"
+  },
+  "imports": {
+    "@mikro-orm/knex": "npm:@mikro-orm/knex",
+    "@ts-morph/ts-morph": "jsr:@ts-morph/ts-morph@^25.0.1",
+    "sqlstring-sqlite": "npm:sqlstring-sqlite"
+  },
+  "lint": {
+    "rules": {
+      "include": [
+        "no-console"
+      ]
+    }
+  }
+}
