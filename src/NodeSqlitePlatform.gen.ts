@@ -33,7 +33,7 @@ import { NodeSqliteSchemaHelper } from './NodeSqliteSchemaHelper.gen.ts';
 import { NodeSqliteExceptionConverter } from './NodeSqliteExceptionConverter.gen.ts';
 export class NodeSqlitePlatform extends BaseSqlitePlatform {
     protected override readonly schemaHelper: NodeSqliteSchemaHelper = new NodeSqliteSchemaHelper(this);
-    protected override readonly exceptionConverter = new NodeSqliteExceptionConverter();
+    protected override readonly exceptionConverter: NodeSqliteExceptionConverter = new NodeSqliteExceptionConverter();
     override escape(value: any): string {
         return sqlstringSqlite.escape(value, true, this.timezone);
     }

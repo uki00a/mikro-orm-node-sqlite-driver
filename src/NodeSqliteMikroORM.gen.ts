@@ -49,6 +49,6 @@ export class NodeSqliteMikroORM<EM extends EntityManager = SqlEntityManager> ext
 }
 export type NodeSqliteOptions = Options<NodeSqliteDriver>;
 /* istanbul ignore next */
-export function defineNodeSqliteConfig(options: NodeSqliteOptions) {
+export function defineNodeSqliteConfig(options: NodeSqliteOptions): NodeSqliteOptions {
     return defineConfig({ driver: NodeSqliteDriver, ...options });
 }
