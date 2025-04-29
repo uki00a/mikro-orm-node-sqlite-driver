@@ -1,4 +1,6 @@
 {
+  "name": "@uki00a/mikro-orm-node-sqlite-driver",
+  "exports": { ".": "./src/index.ts" },
   "tasks": {
     "clean:gen": "rm src/*.gen.ts",
     "tools:patch": "deno run --allow-net=api.github.com,raw.githubusercontent.com --allow-read=tmp --allow-write=src,tmp --allow-env=GITHUB_TOKEN tools/patch.ts",
@@ -6,7 +8,8 @@
       "dependencies": ["lint", "typecheck"]
     },
     "lint": "deno fmt --check && deno lint",
-    "typecheck": "deno check src/index.ts tools"
+    "typecheck": "deno check src/index.ts tools",
+    "test": "deno test --allow-read --allow-env --allow-sys --allow-write=. tests/integration.test.ts"
   },
   "imports": {
     "@mikro-orm/core": "npm:@mikro-orm/core",
@@ -14,10 +17,17 @@
     "@ts-morph/ts-morph": "jsr:@ts-morph/ts-morph@^25.0.1",
     "sqlstring-sqlite": "npm:sqlstring-sqlite"
   },
+  "compilerOptions": {
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  },
   "lint": {
     "rules": {
       "include": [
         "no-console"
+      ],
+      "exclude": [
+        "no-slow-types"
       ]
     }
   }

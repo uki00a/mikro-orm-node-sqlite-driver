@@ -33,3 +33,6 @@ jobs:
           git diff --exit-code
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run tests
+        run:
+          deno task test
