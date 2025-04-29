@@ -103,10 +103,10 @@ export class NodeSqliteKnexDialect
     }
     const statement = connection.prepare(obj.sql);
     if (callMethod === "all") {
-      const response = statement.all(...obj.bindings);
+      const response = statement.all(...(obj.bindings ?? []));
       obj.response = response;
     } else {
-      const response = statement.run(...obj.bindings);
+      const response = statement.run(...(obj.bindings ?? []));
       obj.response = response;
       obj.context = {
         lastID: response.lastInsertRowid,
