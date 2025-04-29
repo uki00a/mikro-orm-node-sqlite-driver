@@ -13,10 +13,10 @@
     "test": "deno test --allow-read --allow-env --allow-sys --allow-write=. tests/integration.test.ts"
   },
   "imports": {
-    "@mikro-orm/core": "npm:@mikro-orm/core",
-    "@mikro-orm/knex": "npm:@mikro-orm/knex",
+    "@mikro-orm/core": "npm:@mikro-orm/core@6",
+    "@mikro-orm/knex": "npm:@mikro-orm/knex@6",
     "@ts-morph/ts-morph": "jsr:@ts-morph/ts-morph@^25.0.1",
-    "sqlstring-sqlite": "npm:sqlstring-sqlite"
+    "sqlstring-sqlite": "npm:sqlstring-sqlite@0.1.1"
   },
   "compilerOptions": {
     "emitDecoratorMetadata": true,

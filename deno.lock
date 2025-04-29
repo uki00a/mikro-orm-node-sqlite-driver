@@ -7,10 +7,9 @@
     "jsr:@std/path@^1.0.9": "1.0.9",
     "jsr:@ts-morph/common@~0.26.1": "0.26.1",
     "jsr:@ts-morph/ts-morph@^25.0.1": "25.0.1",
-    "npm:@mikro-orm/core@*": "6.4.13",
-    "npm:@mikro-orm/knex@*": "6.4.13_@mikro-orm+core@6.4.13",
-    "npm:@types/node@*": "22.12.0",
-    "npm:sqlstring-sqlite@*": "0.1.1"
+    "npm:@mikro-orm/core@6": "6.4.13",
+    "npm:@mikro-orm/knex@6": "6.4.13_@mikro-orm+core@6.4.13",
+    "npm:sqlstring-sqlite@0.1.1": "0.1.1"
   },
   "jsr": {
     "@david/code-block-writer@13.0.3": {
@@ -77,12 +76,6 @@
       "dependencies": [
         "@nodelib/fs.scandir",
         "fastq"
-      ]
-    },
-    "@types/node@22.12.0": {
-      "integrity": "sha512-Fll2FZ1riMjNmlmJOdAyY5pUbkftXslB5DgEzlIuNaiWhXd00FhWxVC/r4yV/4wBb9JfImTu+jiSvXTkJ7F/gA==",
-      "dependencies": [
-        "undici-types"
       ]
     },
     "array-union@2.1.0": {
@@ -329,9 +322,6 @@
         "is-number"
       ]
     },
-    "undici-types@6.20.0": {
-      "integrity": "sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg=="
-    },
     "universalify@2.0.1": {
       "integrity": "sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw=="
     }
@@ -339,9 +329,9 @@
   "workspace": {
     "dependencies": [
       "jsr:@ts-morph/ts-morph@^25.0.1",
-      "npm:@mikro-orm/core@*",
-      "npm:@mikro-orm/knex@*",
-      "npm:sqlstring-sqlite@*"
+      "npm:@mikro-orm/core@6",
+      "npm:@mikro-orm/knex@6",
+      "npm:sqlstring-sqlite@0.1.1"
     ]
   }
 }
