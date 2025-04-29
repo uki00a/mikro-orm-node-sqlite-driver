@@ -209,7 +209,19 @@ function ensureTsExtname(
 
 function rewriteImportDeclarations(sourceFile: SourceFile): void {
   for (const importDeclaration of sourceFile.getImportDeclarations()) {
-    ensureTsExtname(importDeclaration);
+    rewriteImportDeclaration(sourceFile, importDeclaration);
+  }
+}
+
+function rewriteImportDeclaration(
+  sourceFile: SourceFile,
+  importDeclaration: ImportDeclaration,
+): void {
+  ensureTsExtname(importDeclaration);
+  const specifier = importDeclaration.getModuleSpecifierValue();
+  if (specifier === "sqlstring-sqlite") {
+    rewriteImportDeclarationForSqlstringSqlite(importDeclaration);
+  } else {
     for (const namedImport of importDeclaration.getNamedImports()) {
       if (namedImport.getName() === "BetterSqliteKnexDialect") {
         // Replace references to `BetterSqliteKnexDialect` with `NodeSqliteKnexDialect`
@@ -231,6 +243,32 @@ function rewriteImportDeclarations(sourceFile: SourceFile): void {
       }
     }
   }
+}
+
+function rewriteImportDeclarationForSqlstringSqlite(
+  importDeclaration: ImportDeclaration,
+): void {
+  const mod = "sqlstringSqlite";
+  for (const namedImport of importDeclaration.getNamedImports()) {
+    const nameNode = namedImport.getNameNode();
+    if (!Node.isIdentifier(nameNode)) continue;
+
+    // Rewrite call expressions
+    for (
+      const reference of nameNode.findReferencesAsNodes()
+    ) {
+      if (!Node.isRenameable(reference)) continue;
+
+      const parent = reference.getParentOrThrow();
+      if (!Node.isCallExpression(parent)) continue;
+      const expression = parent.getExpression();
+      if (!Node.isIdentifier(expression)) continue;
+      const text = expression.getText();
+      expression.replaceWithText(`${mod}.${text}`);
+    }
+  }
+  importDeclaration.setDefaultImport(mod);
+  importDeclaration.removeNamedImports();
 }
 
 function rewriteExportDeclarations(sourceFile: SourceFile): void {

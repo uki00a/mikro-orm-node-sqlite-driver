@@ -27,7 +27,7 @@
  *
  */
 // @ts-ignore
-import { escape } from 'sqlstring-sqlite';
+import sqlstringSqlite from 'sqlstring-sqlite';
 import { BaseSqlitePlatform } from '@mikro-orm/knex';
 import { NodeSqliteSchemaHelper } from './NodeSqliteSchemaHelper.gen.ts';
 import { NodeSqliteExceptionConverter } from './NodeSqliteExceptionConverter.gen.ts';
@@ -35,6 +35,6 @@ export class NodeSqlitePlatform extends BaseSqlitePlatform {
     protected override readonly schemaHelper: NodeSqliteSchemaHelper = new NodeSqliteSchemaHelper(this);
     protected override readonly exceptionConverter = new NodeSqliteExceptionConverter();
     override escape(value: any): string {
-        return escape(value, true, this.timezone);
+        return sqlstringSqlite.escape(value, true, this.timezone);
     }
 }
