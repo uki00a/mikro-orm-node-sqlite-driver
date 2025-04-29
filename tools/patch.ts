@@ -171,6 +171,31 @@ function rewriteExportedDeclarations(sourceFile: SourceFile): void {
             name.replace(kOriginalClassNamePrefix, kNewClassNamePrefix),
           );
         }
+
+        // Rewrite some APIs to conform to `no-slow-types` rule.
+        if (
+          Node.isFunctionDeclaration(declaration) &&
+          declaration.getName() === "defineNodeSqliteConfig"
+        ) {
+          // Rewrite `defineNodeSqliteConfig()`
+          declaration.setReturnType("NodeSqliteOptions");
+        } else if (
+          Node.isClassDeclaration(declaration)
+        ) {
+          for (const member of declaration.getMembers()) {
+            if (!Node.isPropertyDeclaration(member)) continue;
+            if (member.hasModifier("private")) continue;
+
+            const initializer = member.getInitializer();
+            if (initializer == null) continue;
+            if (!Node.isNewExpression(initializer)) continue;
+            const initializerExpression = initializer.getExpression();
+            if (!Node.isIdentifier(initializerExpression)) continue;
+
+            // Explicitly specifiy a type
+            member.setType(initializerExpression.getText());
+          }
+        }
       }
     }
   }

@@ -25,9 +25,6 @@
     "rules": {
       "include": [
         "no-console"
-      ],
-      "exclude": [
-        "no-slow-types"
       ]
     }
   }
