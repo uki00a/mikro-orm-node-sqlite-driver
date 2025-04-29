@@ -83,7 +83,11 @@ export class NodeSqliteKnexDialect
    * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
    * OTHER DEALINGS IN THE SOFTWARE.
    */
-  async _query(connection, obj) {
+  _query(
+    connection: DatabaseSync,
+    // deno-lint-ignore no-explicit-any
+    obj: any,
+  ) {
     let callMethod: "all" | "run";
     switch (obj.method) {
       case "insert":
@@ -98,16 +102,17 @@ export class NodeSqliteKnexDialect
         callMethod = "all";
     }
     const statement = connection.prepare(obj.sql);
-    const response = statement[callMethod](...obj.bindings);
     if (callMethod === "all") {
+      const response = statement.all(...obj.bindings);
       obj.response = response;
     } else {
+      const response = statement.run(...obj.bindings);
       obj.response = response;
       obj.context = {
         lastID: response.lastInsertRowid,
         changes: response.changes,
       };
     }
-    return obj;
+    return Promise.resolve(obj);
   }
 }
