@@ -27,8 +27,8 @@ jobs:
         run:
           deno task check
       - name: Run tools/patch.ts
-        run:
-          deno tack clean:gen
+        run: |
+          deno task clean:gen
           deno task tools:patch
           git diff --exit-code
         env:
