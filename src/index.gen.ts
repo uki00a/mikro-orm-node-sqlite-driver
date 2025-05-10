@@ -1,7 +1,7 @@
 // deno-fmt-ignore-file
 // deno-lint-ignore-file
 /**
- * Generated from https://github.com/mikro-orm/mikro-orm/blob/v6.4.13/packages/better-sqlite/src/index.ts which is licensed as follows:
+ * Generated from https://github.com/mikro-orm/mikro-orm/blob/v6.4.15/packages/better-sqlite/src/index.ts which is licensed as follows:
  *
  * MIT License
  *
