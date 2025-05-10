@@ -7,8 +7,8 @@
     "jsr:@std/path@^1.0.9": "1.0.9",
     "jsr:@ts-morph/common@~0.26.1": "0.26.1",
     "jsr:@ts-morph/ts-morph@^25.0.1": "25.0.1",
-    "npm:@mikro-orm/core@6": "6.4.13",
-    "npm:@mikro-orm/knex@6": "6.4.13_@mikro-orm+core@6.4.13",
+    "npm:@mikro-orm/core@6": "6.4.15",
+    "npm:@mikro-orm/knex@6": "6.4.15_@mikro-orm+core@6.4.15",
     "npm:sqlstring-sqlite@0.1.1": "0.1.1"
   },
   "jsr": {
@@ -40,8 +40,8 @@
     }
   },
   "npm": {
-    "@mikro-orm/core@6.4.13": {
-      "integrity": "sha512-DG6QGr3J9bBy64DBBxoA6WwvnKr35QqOGsQ8OE2B8ccUaK4jrpMolCkKYbZpJmCHGG4qKaECRu46at6nYZzogA==",
+    "@mikro-orm/core@6.4.15": {
+      "integrity": "sha512-1uQ7lThYymUHf6k6soByJ0qmnYFZcfpczAdmGsfIkGwoE0Ix83RIea+UAJk4pSFeKgXYdiDZOAFu5t224P/lOw==",
       "dependencies": [
         "dataloader",
         "dotenv",
@@ -52,8 +52,8 @@
         "reflect-metadata"
       ]
     },
-    "@mikro-orm/knex@6.4.13_@mikro-orm+core@6.4.13": {
-      "integrity": "sha512-S1FD0VJ0zyGnWdmigZEq11vA+Yf9vb5VotbkZOB1s2jC3WH2x8uFM27M8rpmVGHMlJx7LSEZmOw18uFN+w+tOQ==",
+    "@mikro-orm/knex@6.4.15_@mikro-orm+core@6.4.15": {
+      "integrity": "sha512-oGehWwJmr/4Jac9Hn+HvMhSUTG+Cqxb1/oFNMFogKVepjd5mN2YUSP2s58DdHdHZHyDCSmAM8pUoMpMk7Q2/6A==",
       "dependencies": [
         "@mikro-orm/core",
         "fs-extra",
@@ -248,8 +248,8 @@
         "picomatch"
       ]
     },
-    "mikro-orm@6.4.13": {
-      "integrity": "sha512-sQZezhVLjH/gHUjVqsn+k60xC4TsL7h+Q/0UPe+OF4LoywTZNKwid1mN3WPxNd4c5eI6Aavl11KIsu2t9OKqzQ=="
+    "mikro-orm@6.4.15": {
+      "integrity": "sha512-ghtt7SnXLkoTcmvSzUn2ORsxKqo9pi9NYPmvu3qKIP41a1l0lQzwu0VG+PkywXSHC669DPDbikWqoo2FOdk90w=="
     },
     "ms@2.1.2": {
       "integrity": "sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w=="
