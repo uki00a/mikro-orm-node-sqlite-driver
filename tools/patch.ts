@@ -5,9 +5,10 @@ import type {
   SourceFile,
 } from "@ts-morph/ts-morph";
 import { Node, Project } from "@ts-morph/ts-morph";
+import versions from "../versions.json" with { type: "json" };
 
 const kRepository = "mikro-orm/mikro-orm";
-const kVersion = "v6.4.13";
+const kVersion = `v${versions["mikro-orm"]}`;
 const kPathToBasePackageSrcDir = "packages/better-sqlite/src";
 const kPathToLICENSE = "LICENSE";
 const kCacheDir = `tmp/${kVersion}`;

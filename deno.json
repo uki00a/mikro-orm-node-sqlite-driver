@@ -5,8 +5,13 @@
   "tasks": {
     "clean:gen": "rm src/*.gen.ts",
     "tools:patch": "deno run --allow-net=api.github.com,raw.githubusercontent.com --allow-read=tmp --allow-write=src,tmp --allow-env=GITHUB_TOKEN tools/patch.ts",
+    "check:versions.json": "deno run --allow-run=deno tools/check-versions-json.ts",
     "check": {
-      "dependencies": ["lint", "typecheck"]
+      "dependencies": [
+        "lint",
+        "typecheck",
+        "check:versions.json"
+      ]
     },
     "lint": "deno fmt --check && deno lint",
     "typecheck": "deno check src/index.ts tools",
@@ -22,19 +27,6 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
   },
-  "lint": {
-    "rules": {
-      "include": [
-        "no-console"
-      ]
-    }
-  },
-  "publish": {
-    "exclude": [
-      "example/",
-      "tests/",
-      "tools/",
-      ".github/"
-    ]
-  }
+  "lint": { "rules": { "include": ["no-console"] } },
+  "publish": { "exclude": ["example/", "tests/", "tools/", ".github/"] }
 }
