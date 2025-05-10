@@ -28,5 +28,7 @@
     "experimentalDecorators": true
   },
   "lint": { "rules": { "include": ["no-console"] } },
-  "publish": { "exclude": ["example/", "tests/", "tools/", ".github/"] }
+  "publish": {
+    "exclude": ["example/", "tests/", "tools/", ".github/", "versions.json"]
+  }
 }
