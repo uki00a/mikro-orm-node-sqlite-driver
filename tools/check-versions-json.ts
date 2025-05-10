@@ -1,15 +1,16 @@
 import versions from "../versions.json" with { type: "json" };
 const decoder = new TextDecoder();
-const mikroORMCore = "@mikro-orm/core";
-const mikroORMKnex = "@mikro-orm/knex";
-const packagesToUpdate = [mikroORMCore, mikroORMKnex];
+const packagesToCheck = [
+  "@mikro-orm/core",
+  "@mikro-orm/knex",
+];
 
 async function main(): Promise<void> {
   if (versions["mikro-orm"].startsWith("v")) {
     throw new Error("Don't prefix the version in `versions.json` with `v`.");
   }
 
-  for (const pkg of packagesToUpdate) {
+  for (const pkg of packagesToCheck) {
     const { success, stdout, stderr } = await new Deno.Command("deno", {
       args: ["info", "--json", pkg],
     }).output();
