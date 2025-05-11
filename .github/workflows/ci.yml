@@ -58,7 +58,7 @@ jobs:
             ~/.deno
             ~/.cache/deno
             ~/.local/share/deno-wasmbuild
-          key: ${{ runner.os }}-deno-check-${{ hashFiles('.deno-version', 'deno.lock') }}
+          key: ${{ runner.os }}-dnt-${{ hashFiles('.deno-version', 'deno.lock') }}
       - name: Run dnt
         run:
           deno task build:npm
