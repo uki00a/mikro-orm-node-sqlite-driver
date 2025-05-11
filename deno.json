@@ -5,6 +5,7 @@
   "tasks": {
     "clean:gen": "rm src/*.gen.ts",
     "tools:patch": "deno run --allow-net=api.github.com,raw.githubusercontent.com --allow-read=tmp --allow-write=src,tmp --allow-env=GITHUB_TOKEN tools/patch.ts",
+    "build:npm": "deno run --allow-env --allow-read --allow-write --allow-net=jsr.io --allow-run=npm,node tools/build_npm.ts",
     "check:versions.json": "deno run --allow-run=deno tools/check-versions-json.ts",
     "check": {
       "dependencies": [
@@ -18,6 +19,7 @@
     "test": "deno test --allow-read --allow-env --allow-sys --allow-write=. tests/integration.test.ts"
   },
   "imports": {
+    "@deno/dnt": "jsr:@deno/dnt@^0.42.1",
     "@mikro-orm/core": "npm:@mikro-orm/core@6",
     "@mikro-orm/knex": "npm:@mikro-orm/knex@6",
     "@ts-morph/ts-morph": "jsr:@ts-morph/ts-morph@^25.0.1",
