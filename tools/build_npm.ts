@@ -79,4 +79,5 @@ await build({
     },
   },
   mappings,
+  rootTestDir: "./tests",
 });
