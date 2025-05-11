@@ -3,7 +3,6 @@ import { build, emptyDir } from "@deno/dnt";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import denoJson from "../deno.json" with { type: "json" };
-import versions from "../versions.json" with { type: "json" };
 
 const kMikroORMCore = "@mikro-orm/core";
 const kMikroORMKnex = "@mikro-orm/knex";
