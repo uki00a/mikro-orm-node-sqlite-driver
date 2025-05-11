@@ -62,5 +62,6 @@ jobs:
       - name: Run dnt
         run:
           deno task build:npm
-      - name: Echo package.json
-        run: echo npm/package.json
+      - name: cat package.json
+        run: |
+          cat npm/package.json
