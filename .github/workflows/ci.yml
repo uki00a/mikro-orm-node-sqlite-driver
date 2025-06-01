@@ -65,3 +65,7 @@ jobs:
       - name: cat package.json
         run: |
           cat npm/package.json
+      - name: Run `npm pack --dry-run`
+        working-directory: npm
+        run: |
+          npm pack --dry-run
