@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { rm } from "node:fs/promises";
 
 import { MikroORM } from "@uki00a/mikro-orm-node-sqlite-driver";
 
@@ -45,4 +46,7 @@ Deno.test("integration", async (t) => {
     }
   });
   await orm.close();
+  if (config.dbName) {
+    await rm(config.dbName);
+  }
 });

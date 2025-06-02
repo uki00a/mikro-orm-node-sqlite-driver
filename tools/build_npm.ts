@@ -80,4 +80,10 @@ await build({
   },
   mappings,
   rootTestDir: "./tests",
+  postBuild: async () => {
+    await Deno.copyFile(
+      join(rootDir, ".gitignore"),
+      join(distDir, ".gitignore"),
+    );
+  },
 });
