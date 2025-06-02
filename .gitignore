@@ -135,5 +135,5 @@ dist
 .yarn/install-state.gz
 .pnp.*
 tmp
-sqlite.db
+**/sqlite.db
 npm
