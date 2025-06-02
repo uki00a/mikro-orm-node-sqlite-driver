@@ -45,4 +45,7 @@ Deno.test("integration", async (t) => {
     }
   });
   await orm.close();
+  if (config.dbName) {
+    await Deno.remove(config.dbName);
+  }
 });
