@@ -1,8 +1,10 @@
 import type { BuildOptions } from "@deno/dnt";
 import { build, emptyDir } from "@deno/dnt";
+import assert from "node:assert/strict";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import denoJson from "../deno.json" with { type: "json" };
+import versions from "../versions.json" with { type: "json" };
 
 const kMikroORMCore = "@mikro-orm/core";
 const kMikroORMKnex = "@mikro-orm/knex";
@@ -87,3 +89,38 @@ await build({
     );
   },
 });
+
+{
+  // Validate and rewrite `package.json`
+  // This block is a workaround for https://github.com/denoland/dnt/issues/433
+  assert(!versions["mikro-orm"].startsWith("v"), "invalid versions.json");
+  assert(!versions["mikro-orm"].startsWith("^"), "invalid versions.json");
+  const semver = versions["mikro-orm"].split(".");
+  assert.equal(semver.length, 3, "invalid semver");
+  const expectedMajorVersionOrMikroORM = Number.parseInt(semver[0]);
+  assert(!Number.isNaN(expectedMajorVersionOrMikroORM), "invalid semver");
+
+  const pathToPackageJson = join(distDir, "package.json");
+  const packageJson = JSON.parse(await Deno.readTextFile(pathToPackageJson));
+  assert.ok(
+    packageJson.dependencies[kMikroORMCore],
+    `dependencies[${kMikroORMCore}] should be defined`,
+  );
+  assert.ok(
+    packageJson.dependencies[kMikroORMKnex],
+    `dependencies[${kMikroORMKnex}] should be defined`,
+  );
+  assert(
+    !packageJson.peerDependencies,
+    "peerDependencies should not be defined",
+  );
+  packageJson.dependencies[kMikroORMKnex] = versions["mikro-orm"];
+  delete packageJson.dependencies[kMikroORMCore];
+  packageJson.peerDependencies = {
+    [kMikroORMCore]: `^${expectedMajorVersionOrMikroORM}.0.0`,
+  };
+  await Deno.writeTextFile(
+    pathToPackageJson,
+    JSON.stringify(packageJson, null, 2),
+  );
+}
