@@ -67,6 +67,7 @@ await build({
     name: denoJson.name,
     version: denoJson.version,
     description: "A MikroORM driver for node:sqlite",
+    keywords: ["mikro-orm"],
     license: "MIT",
     devDependencies: {
       // https://github.com/denoland/deno/commit/9d0a833e7b5574e664a3d4088dbe4e6436a71e04
@@ -84,8 +85,8 @@ await build({
   rootTestDir: "./tests",
   postBuild: async () => {
     await Deno.copyFile(
-      join(rootDir, ".gitignore"),
-      join(distDir, ".gitignore"),
+      join(rootDir, ".npmignore"),
+      join(distDir, ".npmignore"),
     );
   },
 });

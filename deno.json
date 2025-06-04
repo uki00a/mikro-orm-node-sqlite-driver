@@ -31,6 +31,13 @@
   },
   "lint": { "rules": { "include": ["no-console"] } },
   "publish": {
-    "exclude": ["example/", "tests/", "tools/", ".github/", "versions.json"]
+    "exclude": [
+      "example/",
+      "tests/",
+      "tools/",
+      ".github/",
+      "versions.json",
+      ".npmignore"
+    ]
   }
 }
