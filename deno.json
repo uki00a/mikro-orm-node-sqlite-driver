@@ -1,7 +1,7 @@
 {
   "name": "@uki00a/mikro-orm-node-sqlite-driver",
   "exports": { ".": "./src/index.ts" },
-  "version": "0.1.0",
+  "version": "0.2.0",
   "tasks": {
     "clean:gen": "rm src/*.gen.ts",
     "tools:patch": "deno run --allow-net=api.github.com,raw.githubusercontent.com --allow-read=tmp --allow-write=src,tmp --allow-env=GITHUB_TOKEN tools/patch.ts",
