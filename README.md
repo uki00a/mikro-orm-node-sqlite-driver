@@ -1,7 +1,6 @@
 # mikro-orm-node-sqlite-driver
 
 [![JSR](https://jsr.io/badges/@uki00a/mikro-orm-node-sqlite-driver)](https://jsr.io/@uki00a/mikro-orm-node-sqlite-driver)
-
 [![NPM Version](https://img.shields.io/npm/v/%40uki00a%2Fmikro-orm-node-sqlite-driver)](https://www.npmjs.com/package/@uki00a/mikro-orm-node-sqlite-driver)
 
 A [MikroORM](https://github.com/mikro-orm/mikro-orm) driver for
