@@ -21,6 +21,7 @@
     "jsr:@ts-morph/ts-morph@^25.0.1": "25.0.1",
     "npm:@mikro-orm/core@6": "6.4.15",
     "npm:@mikro-orm/knex@6": "6.4.15_@mikro-orm+core@6.4.15",
+    "npm:@types/node@*": "22.15.2",
     "npm:sqlstring-sqlite@0.1.1": "0.1.1"
   },
   "jsr": {
@@ -137,6 +138,12 @@
       "dependencies": [
         "@nodelib/fs.scandir",
         "fastq"
+      ]
+    },
+    "@types/node@22.15.2": {
+      "integrity": "sha512-uKXqKN9beGoMdBfcaTY1ecwz6ctxuJAcUlwE55938g0ZJ8lRxwAZqRz2AJ4pzpt5dHdTPMB863UZ0ESiFUcP7A==",
+      "dependencies": [
+        "undici-types"
       ]
     },
     "array-union@2.1.0": {
@@ -387,6 +394,9 @@
       "dependencies": [
         "is-number"
       ]
+    },
+    "undici-types@6.21.0": {
+      "integrity": "sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ=="
     },
     "universalify@2.0.1": {
       "integrity": "sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw=="
