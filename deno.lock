@@ -5,6 +5,7 @@
     "jsr:@david/code-block-writer@^13.0.2": "13.0.3",
     "jsr:@deno/cache-dir@0.20": "0.20.0",
     "jsr:@deno/dnt@~0.42.1": "0.42.1",
+    "jsr:@deno/graph@0.86": "0.86.9",
     "jsr:@std/bytes@^1.0.5": "1.0.5",
     "jsr:@std/fmt@1": "1.0.7",
     "jsr:@std/fmt@^1.0.3": "1.0.7",
@@ -20,6 +21,7 @@
     "jsr:@ts-morph/ts-morph@^25.0.1": "25.0.1",
     "npm:@mikro-orm/core@6": "6.4.15",
     "npm:@mikro-orm/knex@6": "6.4.15_@mikro-orm+core@6.4.15",
+    "npm:@types/node@*": "22.15.2",
     "npm:sqlstring-sqlite@0.1.1": "0.1.1"
   },
   "jsr": {
@@ -29,6 +31,7 @@
     "@deno/cache-dir@0.20.0": {
       "integrity": "840a78d4294102ac9ba6be70e8c1bf2983d18de4ef022f2c1bb8f8aaaffada48",
       "dependencies": [
+        "jsr:@deno/graph",
         "jsr:@std/fmt@^1.0.3",
         "jsr:@std/fs@^1.0.6",
         "jsr:@std/io",
@@ -45,6 +48,9 @@
         "jsr:@std/path@1",
         "jsr:@ts-morph/bootstrap"
       ]
+    },
+    "@deno/graph@0.86.9": {
+      "integrity": "c4f353a695bcc5246c099602977dabc6534eacea9999a35a8cb24e807192e6a1"
     },
     "@std/bytes@1.0.5": {
       "integrity": "4465dd739d7963d964c809202ebea6d5c6b8e3829ef25c6a224290fbb8a1021e"
@@ -132,6 +138,12 @@
       "dependencies": [
         "@nodelib/fs.scandir",
         "fastq"
+      ]
+    },
+    "@types/node@22.15.2": {
+      "integrity": "sha512-uKXqKN9beGoMdBfcaTY1ecwz6ctxuJAcUlwE55938g0ZJ8lRxwAZqRz2AJ4pzpt5dHdTPMB863UZ0ESiFUcP7A==",
+      "dependencies": [
+        "undici-types"
       ]
     },
     "array-union@2.1.0": {
@@ -382,6 +394,9 @@
       "dependencies": [
         "is-number"
       ]
+    },
+    "undici-types@6.21.0": {
+      "integrity": "sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ=="
     },
     "universalify@2.0.1": {
       "integrity": "sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw=="
